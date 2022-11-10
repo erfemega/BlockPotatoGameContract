@@ -36,20 +36,10 @@ contract BlockPotatoGame is Ownable {
     }
   }
 
-  
   function getAddressNfts(address _playerAddress) public view returns(uint256 tokensCount)  {
     tokensCount = blockPotatoContract.balanceOf(_playerAddress);
   }
 
-  // function getNftsOfOwner(address _playerAddress) public {
-  //   uint tokenCount = blockPotatoContract.balanceOf(_playerAddress);
-  //    uint[] memory tokensId = new uint256[](tokenCount);
-  //    for (uint i = 0; i < tokenCount; i++) {
-  //         tokensId[i] = tokenOfOwnerByIndex(_owner, i);
-  //    }
-
-  //    return tokensId;
-  // }
   function setWinnerUmbral(uint256 _newWinnerUmbral) public onlyOwner {
     require(_newWinnerUmbral < MAX_WINNER_UMBRAL, "Invalid winner umbral value");
     winnerUmbral = _newWinnerUmbral;
@@ -57,15 +47,6 @@ contract BlockPotatoGame is Ownable {
 
   function mintNFT(address recipient) internal {
     blockPotatoContract.safeMint(recipient, 'test');
-  }
-
-  function claimNFT() external returns(uint256 newBalance){
-    mintNFT(msg.sender);
-    newBalance = blockPotatoContract.balanceOf(msg.sender);
-  }
-
-  function getNftSupply() public view returns (uint256 supply) {
-    supply = blockPotatoContract.totalSupply();
   }
 
   function getTotalBalance() public view returns (uint256 balance){
